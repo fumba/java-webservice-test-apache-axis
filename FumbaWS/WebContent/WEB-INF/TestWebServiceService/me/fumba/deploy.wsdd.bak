@@ -1,0 +1,29 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from TestWebServiceService WSDL service -->
+
+  <service name="TestWebService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://fumba.me"/>
+      <parameter name="wsdlServiceElement" value="TestWebServiceService"/>
+      <parameter name="schemaQualified" value="http://fumba.me"/>
+      <parameter name="wsdlServicePort" value="TestWebService"/>
+      <parameter name="className" value="me.fumba.TestWebServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="TestWebService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="retrieveCurrentDate" qname="operNS:retrieveCurrentDate" xmlns:operNS="http://fumba.me" returnQName="retNS:retrieveCurrentDateReturn" xmlns:retNS="http://fumba.me" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:username" xmlns:pns="http://fumba.me" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="retrieveCurrentDate"/>
+
+  </service>
+</deployment>
